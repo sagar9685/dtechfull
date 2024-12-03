@@ -14,9 +14,12 @@ const PORT = process.env.PORT || 3000; // Use PORT from .env if available
 
 // Middlewares
 app.use(express.json());
-app.use(cors({
-  origin:process.env.APP_URI
-}));
+const corsOptions = {
+  origin: process.env.APP_URI, // Ensure this matches the frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add any other methods as needed
+  credentials: true, // Allow credentials (cookies, etc.)
+};
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
 app.use("/api/auth", require("./routes/authroutes"));
