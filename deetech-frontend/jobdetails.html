@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fetch job details using job title from URL
     $.ajax({
-        url: `http://localhost:8081/api/jobs/singlejob/${jobtitle}`,
+        url: `https://dtechfull.onrender.com/api/jobs/singlejob/${jobtitle}`,
         type: 'GET',
         success: function (job) {
             if (job) {
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Fetch job details for title and description
         $.ajax({
-            url: `http://localhost:8081/api/jobs/singlejob/${jobId}`,
+            url: `https://dtechfull.onrender.com/api/jobs/singlejob/${jobId}`,
             type: 'GET',
             success: function (job) {
                 if (job) {
