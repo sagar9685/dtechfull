@@ -234,7 +234,7 @@ document.getElementById("signupForm").addEventListener("submit", function (event
 
     const userData = { username, name, email, password, otp };
 
-    fetch('http://localhost:8081/api/auth/register', {
+    fetch('https://dtechfull.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
