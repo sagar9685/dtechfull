@@ -195,7 +195,7 @@
                 };
     
                 // Send API request to validate the login credentials
-                fetch("http://localhost:8081/api/auth/login", {
+                fetch(`${import.meta.env}/api/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
