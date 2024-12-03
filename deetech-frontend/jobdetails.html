@@ -146,7 +146,7 @@
                 console.log("DOM fully loaded and parsed");
         
                 // Check if user is logged in by checking for a simple flag (e.g., localStorage item)
-                const authToken = sessionStorage.getItem("authToken") ;
+                const authToken = localStorage.getItem("authToken") ;
     
     if (authToken) {
         console.log("User is considered logged in.");
@@ -167,21 +167,21 @@
                 // Simulating login action (can be replaced with your own login logic)
                 document.getElementById("loginButton").addEventListener("click", function () {
                     console.log("Login button clicked");
-                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    localStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
                     window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
                 });
         
                 // Simulating signup action (can be replaced with your own signup logic)
                 document.getElementById("signupButton").addEventListener("click", function () {
                     console.log("Signup button clicked");
-                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    localStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
                     window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
                 });
         
                 // Logout function
                 document.getElementById("logoutButton").addEventListener("click", function () {
                     console.log("Logout button clicked");
-                    sessionStorage.removeItem("authToken"); // Remove login flag from localStorage
+                    localStorage.removeItem("authToken"); // Remove login flag from localStorage
                     window.location.href = "login.html"; // Redirect to login page
                
                 });
