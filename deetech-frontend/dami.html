@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Deetech Consulting</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="deetech consulting, tech solutions, software development" name="keywords">
+    <meta content="Your one-stop solution for tech consulting and software development." name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Spinner */
+        #spinner {
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+
+        .topbar {
+            background-color: #f8f9fa;
+        }
+
+        .bio-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            margin: 20px 0;
+            padding: 20px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .bio-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #profile-image {
+            width: 180px;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50%; /* Circular image */
+            margin-right: 20px;
+            border: 4px solid #007bff; /* Border around the image */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .bio-content {
+            flex: 1;
+        }
+
+        h2 {
+            font-weight: 700;
+            color: #007bff; /* Change color to primary */
+        }
+
+        .lead {
+            font-weight: 400;
+            color: #555;
+        }
+
+        .bio-full {
+            margin-top: 15px;
+            display: none;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            opacity: 0;
+        }
+
+        .bio-full.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #read-more-btn {
+            margin-top: 10px;
+            background-color: #007bff; /* Button background */
+            border: none; /* Remove border */
+            color: #fff; /* White text */
+            padding: 10px 20px; /* Button padding */
+            border-radius: 30px; /* Rounded button */
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #read-more-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        @media (max-width: 768px) {
+            .bio-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #profile-image {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Spinner Start -->
+    <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div> -->
+    <!-- Spinner End -->
+
+    <!-- Top Bar -->
+    <div class="container-fluid topbar px-0 d-none d-lg-block">
+        <div class="container px-0">
+            <div class="row gx-0 align-items-center" style="height: 45px;">
+                <div class="col-lg-8 text-center text-lg-start mb-lg-0">
+                    <div class="d-flex flex-wrap">
+                        <a href="#" class="text-muted me-4"><i class="fas fa-phone-alt text-primary me-2"></i>+1(443)985-4761</a>
+                        <a href="#" class="text-muted me-0"><i class="fas fa-envelope text-primary me-2"></i>contact@deetechconsulting.com</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="https://www.instagram.com/deetechconsulting/?hl=en" class="btn btn-primary btn-square rounded-circle nav-fill me-3"><i class="fab fa-instagram text-white"></i></a>
+                        <a href="https://www.linkedin.com/in/damilola-waybright-83a254201/" class="btn btn-primary btn-square rounded-circle nav-fill me-0"><i class="fab fa-linkedin-in text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="container-fluid sticky-top px-0">
+        <div class="position-absolute bg-dark" style="left: 0; top: 0; width: 100%; height: 100%;"></div>
+        <div class="container px-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0">
+                        <img src="img/Deetech_Logo.png" alt="Deetech Logo" height="100" width="250" class="me-3">
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="project.html" class="nav-item nav-link">Projects</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="blog.html" class="dropdown-item">Our Blog</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="faqs.html" class="dropdown-item">FAQs</a>
+                                <a href="job-list.html" class="dropdown-item">Job List</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <div class="d-flex align-items-center flex-nowrap pt-xl-0">
+                        <a href="login.html" id="loginButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+                            Login
+                        </a>
+                        <a href="signup.html" id="signupButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+                            Signup
+                        </a>
+                        <a href="profile.html" id="profileButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+                            Profile
+                        </a>
+                        <a href="#" id="logoutButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+                            Logout
+                        </a>
+                    </div>
+                    <!-- Login/Signup and Profile/Logout Buttons End -->
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- JavaScript for Login/Logout Button Toggle -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM fully loaded and parsed");
+    
+            // Check if user is logged in by checking for a simple flag (e.g., localStorage item)
+            const authToken = sessionStorage.getItem("authToken") ;
+
+if (authToken) {
+    console.log("User is considered logged in.");
+    // User is logged in, show Profile and Logout, hide Login and Signup
+    document.getElementById("profileButton").style.display = "inline-block";
+    document.getElementById("logoutButton").style.display = "inline-block";
+    document.getElementById("loginButton").style.display = "none";
+    document.getElementById("signupButton").style.display = "none";
+} else {
+    console.log("User is not logged in.");
+    // User is not logged in, show Login and Signup, hide Profile and Logout
+    document.getElementById("loginButton").style.display = "inline-block";
+    document.getElementById("signupButton").style.display = "inline-block";
+    document.getElementById("profileButton").style.display = "none";
+    document.getElementById("logoutButton").style.display = "none";
+}
+    
+            // Simulating login action (can be replaced with your own login logic)
+            document.getElementById("loginButton").addEventListener("click", function () {
+                console.log("Login button clicked");
+                sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+            });
+    
+            // Simulating signup action (can be replaced with your own signup logic)
+            document.getElementById("signupButton").addEventListener("click", function () {
+                console.log("Signup button clicked");
+                sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+            });
+    
+            // Logout function
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                console.log("Logout button clicked");
+                sessionStorage.removeItem("authToken"); // Remove login flag from localStorage
+                window.location.href = "login.html"; // Redirect to login page
+           
+            });
+        });
+    </script>
+    <!-- Biography Section -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="bio-container p-3">
+                    <img src="img/ceo1.jpg" alt="Profile Picture" class="img-fluid" id="profile-image">
+                    <div class="bio-content">
+                        <h2 class="mb-3">Damilola Waybright</h2>
+                        <p class="lead" id="bio-summary">Damilola is a skilled data analyst with expertise in data analysis and decision-making processes.</p>
+                        <button class="btn" id="read-more-btn">Read More</button>
+                        <div class="bio-full" id="full-bio">
+                            <p>With more than eight years of devoted experience, Damilola is a skilled and professional Black American data analyst. She has contributed significantly to data analysis and decision-making processes at prestigious firms thanks to her special combination of abilities and solid educational background.</p>
+
+                            <p>Damilola has a thorough understanding of both the business and technical components of data analysis, having obtained dual Bachelor of Science degrees in Computer Science and Business Management. Her education has given her a strong foundation in software development, statistical analysis, and data modeling, which enables her to approach challenging data problems effectively and precisely.</p>
+                            
+                            <p>Damilola has proven throughout her career that she can provide practical insights and solutions that promote company success. She has collaborated closely with a range of groups and stakeholders, using data analytics to find patterns, spot openings, and resolve pressing data problems. Her proficiency in data visualization has been important in showcasing results in an eloquent and captivating way, enabling well-informed decision-making across the board for the firm.</p>
+                            
+                            <p>In addition to her accomplishments in the workplace, Damilola is a loving mother of two who manages her career and family obligations. She is passionate about having a positive impact on people's lives and works hard to maintain a work-life balance.</p>
+                            
+                            <p>She likes to play chess occasionally in her free time and draws strategic connections between the game and her analytical work. She also enjoys listening to a wide variety of musical genres for inspiration and relaxation.</p>
+                            
+                            <p>Damilola is dedicated to lifelong learning and keeping up with the most recent developments in technology and data analytics. She is an asset to any firm she works with because of her commitment, knowledge, and love for data-driven insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("read-more-btn").addEventListener("click", function() {
+            const fullBio = document.getElementById("full-bio");
+            if (!fullBio.classList.contains('show')) {
+                fullBio.classList.add('show');
+                fullBio.style.display = 'block';
+                this.textContent = "Read Less";
+            } else {
+                fullBio.classList.remove('show');
+                fullBio.style.display = 'none';
+                this.textContent = "Read More";
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Newsletter</h4>
+                            <p class="mb-3">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
+                            <div class="position-relative mx-auto rounded-pill">
+                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
+                                <a href="signup.html">
+                                <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-white mb-4">Explore</h4>
+                        <a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a>
+                        <a href="service.html"><i class="fas fa-angle-right me-2"></i> Services</a>
+                        <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="project.html"><i class="fas fa-angle-right me-2"></i> Latest Projects</a>
+                        <a href="testimonial.html"><i class="fas fa-angle-right me-2"></i> testimonial</a>
+                        <a href="team.html"><i class="fas fa-angle-right me-2"></i> Our Team</a>
+                        <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-white mb-4">Contact Info</h4>
+                        <a href=""><i class="fa fa-map-marker-alt me-2"></i> 123 Street, New York, USA</a>
+                        <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                        <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                        <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
+                        <a href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-light btn-md-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item-post d-flex flex-column">
+                        <h4 class="text-white mb-4">Popular Post</h4>
+                        <div class="d-flex flex-column mb-3">
+                            <p class="text-uppercase text-primary mb-2">Investment</p>
+                            <a href="#" class="text-body">Revisiting Your Investment & Distribution Goals</a>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                            <p class="text-uppercase text-primary mb-2">Business</p>
+                            <a href="#" class="text-body">Dimensional Fund Advisors Interview with Director</a>
+                        </div>
+                        <div class="footer-btn text-start">
+                            <a href="#" class="btn btn-light rounded-pill px-4">View All Post <i class="fa fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <div class="footer-item">
+                        <h4 class="text-white mb-4">Newsletter</h4>
+                        <p class="mb-3">Get the latest update from us on our service.</p>
+                        <div class="position-relative mx-auto rounded-pill">
+                            <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
+                            <a href="signup.html">
+                            <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="text-white mb-4">Explore</h4>
+                    <a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a>
+                    <a href="service.html"><i class="fas fa-angle-right me-2"></i> Services</a>
+                    <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                    <a href="project.html"><i class="fas fa-angle-right me-2"></i> Latest Projects</a>
+                    <a href="testimonial.html"><i class="fas fa-angle-right me-2"></i> testimonial</a>
+                    <a href="team.html"><i class="fas fa-angle-right me-2"></i> Our Team</a>
+                    <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="text-white mb-4">Contact Info</h4>
+                    <a href=""><i class="fa fa-map-marker-alt me-2"></i>Daleview DR Glen Burnie MD 21060-7682,USA</a>
+                    <a href=""><i class="fas fa-envelope me-2"></i> contact@deetechconsulting.com</a>
+                    <!-- <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                    <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a> -->
+                    <a href="" class="mb-3"><i class="fas fa-phone me-2"></i>+1 (443) 985-4761</a>
+                    <div class="d-flex align-items-center">
+                        <!-- <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-twitter"></i></a> -->
+                        <a class="btn btn-light btn-md-square me-2" href="https://www.instagram.com/deetechconsulting/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-light btn-md-square me-0" href="https://www.linkedin.com/in/damilola-waybright-83a254201/"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item-post d-flex flex-column">
+                    <h4 class="text-white mb-4">Popular Post</h4>
+                    <div class="d-flex flex-column mb-3">
+                        <p class="text-uppercase text-primary mb-2">Training Program</p>
+                        <a href="#" class="text-body">Providing Training to Help You Achieve Your Goals.</a>
+                    </div>
+                    <div class="d-flex flex-column mb-3">
+                        <p class="text-uppercase text-primary mb-2">Jobs</p>
+                        <a href="#" class="text-body">We Offer Job Opportunities for Your Career Growth.</a>
+                    </div>
+                    <div class="footer-btn text-start">
+                        <a href="#" class="btn btn-light rounded-pill px-4">View All Post <i class="fa fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-body"><a href="#" class="border-bottom text-primary"><i class="fas fa-copyright text-light me-2"></i>Deetech Consulting</a>, All right reserved.</span>
+            </div>
+            <div class="col-md-6 text-center text-md-end text-body">
+                <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                Designed By <a class="border-bottom text-primary" href="">Sagar Gupta</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Job Details - Job Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="img/favicon.ico" rel="icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Custom Styles for Job Details with 3D Effects */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand h1 {
+            font-size: 2rem;
+        }
+
+        #job-details {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+            transition: transform 0.3s ease;
+        }
+        #job-details:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0, 0, 0, 0.07);
+        }
+
+        .job-item h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #007bff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-item p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .job-item p strong {
+            color: #333;
+        }
+
+        .job-item img {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #apply-button {
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .apply-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .no-logo-text {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            #job-details {
+                padding: 20px;
+            }
+
+            .job-item h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Navbar Start -->
+        <div class="container-fluid sticky-top px-0">
+            <div class="container px-0">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
+                    <a href="index.html" class="navbar-brand p-0">
+                        <h1 class="text-primary m-0">
+                            <img src="img/Deetech_Logo.png" alt="Deetech Logo" height="100" width="250" class="me-3">
+                        </h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto py-0">
+                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="project.html" class="nav-item nav-link">Projects</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap pt-xl-0">
+                            <a href="login.html" id="loginButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+                                Login
+                            </a>
+                            <a href="signup.html" id="signupButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+                                Signup
+                            </a>
+                            <a href="profile.html" id="profileButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+                                Profile
+                            </a>
+                            <a href="#" id="logoutButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+                                Logout
+                            </a>
+                        </div>
+                        <!-- Login/Signup and Profile/Logout Buttons End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- JavaScript for Login/Logout Button Toggle -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded and parsed");
+        
+                // Check if user is logged in by checking for a simple flag (e.g., localStorage item)
+                const authToken = sessionStorage.getItem("authToken") ;
+    
+    if (authToken) {
+        console.log("User is considered logged in.");
+        // User is logged in, show Profile and Logout, hide Login and Signup
+        document.getElementById("profileButton").style.display = "inline-block";
+        document.getElementById("logoutButton").style.display = "inline-block";
+        document.getElementById("loginButton").style.display = "none";
+        document.getElementById("signupButton").style.display = "none";
+    } else {
+        console.log("User is not logged in.");
+        // User is not logged in, show Login and Signup, hide Profile and Logout
+        document.getElementById("loginButton").style.display = "inline-block";
+        document.getElementById("signupButton").style.display = "inline-block";
+        document.getElementById("profileButton").style.display = "none";
+        document.getElementById("logoutButton").style.display = "none";
+    }
+        
+                // Simulating login action (can be replaced with your own login logic)
+                document.getElementById("loginButton").addEventListener("click", function () {
+                    console.log("Login button clicked");
+                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+                });
+        
+                // Simulating signup action (can be replaced with your own signup logic)
+                document.getElementById("signupButton").addEventListener("click", function () {
+                    console.log("Signup button clicked");
+                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+                });
+        
+                // Logout function
+                document.getElementById("logoutButton").addEventListener("click", function () {
+                    console.log("Logout button clicked");
+                    sessionStorage.removeItem("authToken"); // Remove login flag from localStorage
+                    window.location.href = "login.html"; // Redirect to login page
+               
+                });
+            });
+        </script>
+        <!-- Navbar End -->
+
+        <!-- Job Details Start -->
+        <div class="container py-5">
+            <div id="job-details" class="p-4 bg-light shadow rounded">
+                <!-- Job details will be injected here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+window.onload = function () {
+    const username = localStorage.getItem("username") || sessionStorage.getItem("username");
+    const email = localStorage.getItem("email") || sessionStorage.getItem("email");
+
+    // Set the username and email in the form fields if they exist
+    if (username) {
+        document.getElementById('username').value = username;
+    }
+    if (email) {
+        document.getElementById('email').value = email;
+    }
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded and parsed");
+
+    // Fetch job details using job title from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobtitle = urlParams.get('id');
+
+    // Fetch job details using job title from URL
+    $.ajax({
+        url: `http://localhost:8081/api/jobs/singlejob/${jobtitle}`,
+        type: 'GET',
+        success: function (job) {
+            if (job) {
+                console.log('Job Data:', job);
+                const companyLogo = job.companyLogo
+                    ? `<img class="img-fluid border rounded mb-3" src="${job.companyLogo}" alt="${job.company}" style="width: 150px; height: 150px;">`
+                    : `<p class="no-logo-text">No Logo Available</p>`;
+                
+                const jobDetails = `
+                    <div class="job-item mb-4">
+                        <h3>${job.title}</h3>
+                        <p><strong>Company:</strong> ${job.company}</p>
+                        ${companyLogo}
+                        <p><strong>Location:</strong> ${job.state}, ${job.country}</p>
+                        <p><strong>Job Type:</strong> ${job.jobtype}</p>
+                        <p><strong>Salary:</strong> ${job.salary}</p>
+                        <p><strong>Description:</strong> ${job.description}</p>
+                        <p><strong>Education Required:</strong> ${job.education}</p>
+                        <p><strong>Experience:</strong> ${job.experience}</p>
+                        <p><strong>Specialization:</strong> ${job.specialization}</p>
+                        <p><strong>Last Date to Apply:</strong> ${new Date(job.lastdatetoapply).toLocaleDateString()}</p>
+                        <p><strong>Number of Posts:</strong> ${job.numberofposts}</p>
+                        <p><strong>Website:</strong> <a href="${job.website}" target="_blank">${job.website}</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:${job.email}">${job.email}</a></p>
+                        <button type="submit" id="apply-button" aria-label="Apply now">Apply Now</button>
+                    </div>
+                `;
+                $('#job-details').html(jobDetails);
+
+                // Attach the event listener after the button is rendered
+                document.getElementById("apply-button").addEventListener("click", function () {
+                    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // Check session for login
+                    if (isLoggedIn) {
+                        const email = localStorage.getItem("email");
+                        const username = localStorage.getItem("username");
+
+                        if (email && username) {
+                            applyForJob(email, username);
+                        } else {
+                            alert("Please complete your profile before applying for jobs.");
+                            window.location.href = "profile.html"; // Redirect to profile page if incomplete
+                        }
+                    } else {
+                        alert("Please login first.");
+                        window.location.href = "login.html"; // Redirect to login page
+                    }
+                });
+            } else {
+                $('#job-details').html('<div class="col-12 text-center">Job not found. Please try again later.</div>');
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching job details:', error);
+            $('#job-details').html('<div class="col-12 text-center">Error fetching job details. Please try again later.</div>');
+        }
+    });
+
+    function applyForJob(email, username) {
+        const jobId = new URLSearchParams(window.location.search).get("id");
+
+        // Fetch job details for title and description
+        $.ajax({
+            url: `http://localhost:8081/api/jobs/singlejob/${jobId}`,
+            type: 'GET',
+            success: function (job) {
+                if (job) {
+                    console.log("Job Title:", job.title);  // Log job title
+                    console.log("Job Description:", job.description);  // Log job description
+                    console.log(email);
+                    console.log(username);
+
+                    const payload = {
+                        email: email,
+                        username: username,
+                        title: job.title,
+                        description: job.description,
+                    };
+
+                    // Call the apply-user API
+                    $.ajax({
+                        url: "http://localhost:8081/jobs/apply-user",  // Your server endpoint
+    type: "POST",  // HTTP method
+    contentType: "application/json",  // Sending JSON data
+    data: JSON.stringify(payload),  // Convert payload to JSON string
+    success: function(response) {
+        console.log("Job applied successfully:", response);  // Log success message
+        alert("Job applied successfully!");
+    },
+    error: function(error) {
+        console.error("Error applying for the job:", error);  // Log error
+        alert("Failed to apply for the job. Please try again.");
+    }
+                    });
+                } else {
+                    alert("Failed to retrieve job details. Please try again later.");
+                }
+            },
+            error: function (error) {
+                console.error("Error fetching job details:", error);
+                alert("Error fetching job details. Please try again later.");
+            }
+        });
+    }
+});
+    </script>
+</body>
+</html>

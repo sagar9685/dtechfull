@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Resume</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styling the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for the entire form */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            background: linear-gradient(to right, #00bfff, #0047ab);
+        }
+
+        /* Contact form styles */
+        .contact_form {
+            background: #ffffff; /* White background for form */
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .contact_form:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Header */
+        .contact_form h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0047ab; /* Darker blue for the header */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Form group layout */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Label styling */
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #495057; /* Darker label color */
+            font-weight: bold;
+            margin-bottom: 10px;
+            flex: 1;
+        }
+
+        /* Textbox styling */
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            font-size: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-left: 10px; /* Space between emoji and input */
+        }
+
+        .form-control:focus {
+            border-color: #007bff; /* Bootstrap primary color */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+            outline: none;
+        }
+
+        /* File input styling */
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            font-size: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .custom-file-label:hover {
+            border-color: #007bff; /* Change to primary color on hover */
+        }
+
+        /* Styling the button */
+        .button-contactForm {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button-contactForm:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Success/Error Message */
+        .msg-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Error and success message style */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Darker green */
+        }
+
+        .alert-danger {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Darker red */
+        }
+        #country {
+    width: 100%;
+    padding: 12px;
+    font-size: 25px;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    margin-left: 10px; /* Add some space from label */
+}
+
+/* Show focus effect on country select dropdown */
+#country:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            .contact_form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-control {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .button-contactForm {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="form-container">
+        <div class="contact_form">
+            <h2>Build Your Resume</h2>
+
+            <!-- Success/Error Message -->
+            <div class="msg-box" id="msgBox"></div>
+
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="fullName">Full Name 🧑‍🎓</label>
+                <input type="text" id="fullName" class="form-control" placeholder="Enter Full Name" required />
+                <div class="alert alert-danger" id="nameError" style="display: none;"></div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address 📍</label>
+                <textarea id="address" class="form-control" placeholder="Enter Address" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile No 📞</label>
+                <input type="tel" id="mobile" class="form-control" placeholder="Enter Mobile No" required />
+                <div class="alert alert-danger" id="mobileError" style="display: none;"></div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country 🌍</label>
+                <select id="country" class="form-control" required>
+                    <option value="">Select Country</option>
+                    <option value="USA">United States</option>
+                    <option value="IND">India</option>
+                    <option value="CAN">Canada</option>
+                    <!-- Add more countries as needed -->
+                </select>
+                <div class="alert alert-danger" id="countryError" style="display: none;"></div>
+            </div>
+
+            <!-- Education Section -->
+            <h6 class="pt-4">Education</h6>
+
+            <div class="form-group">
+                <label for="tenth">10th Grade 🎓</label>
+                <input type="text" id="tenth" class="form-control" placeholder="Ex: 90%" required />
+            </div>
+
+            <div class="form-group">
+                <label for="twelfth">12th Grade 🎓</label>
+                <input type="text" id="twelfth" class="form-control" placeholder="Ex: 90%" required />
+            </div>
+
+            <div class="form-group">
+                <label for="graduation">Graduation with Percentage/Grade 🎓</label>
+                <input type="text" id="graduation" class="form-control" placeholder="Ex: 9.2 CGPA" required />
+            </div>
+
+            <div class="form-group">
+                <label for="postGraduation">Post Graduation with Percentage/Grade 🎓</label>
+                <input type="text" id="postGraduation" class="form-control" placeholder="Mtech with 9.2" />
+            </div>
+
+            <div class="form-group">
+                <label for="phd">PhD with Percentage/Grade 🎓</label>
+                <input type="text" id="phd" class="form-control" placeholder="PhD with Grade" />
+            </div>
+
+            <!-- Resume Upload -->
+            <div class="form-group">
+                <label for="resume">Upload Resume 📄</label>
+                <div class="custom-file">
+                    <input type="file" id="resume" class="custom-file-input" accept=".pdf, .doc, .docx" required />
+                    <label class="custom-file-label" for="resume">Choose file</label>
+                    <div class="alert alert-danger" id="resumeError" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Update Resume Button -->
+            <button type="submit" class="button-contactForm" onclick="validateForm()">Create Resume</button>
+        </div>
+    </section>
+
+    <script>
+        // Fetch session or local storage data and populate the fields
+        window.onload = function() {
+            const username = localStorage.getItem("username") || sessionStorage.getItem("username");
+            const email = localStorage.getItem("email") || sessionStorage.getItem("email");
+            const country = localStorage.getItem("country") || sessionStorage.getItem("country");
+
+            if (username) {
+                document.getElementById('username').value = username;
+            }
+            if (email) {
+                document.getElementById('email').value = email;
+            }
+            if (country) {
+        document.getElementById('country').value = country; // Set the country dropdown
+    }
+        };
+    
+        // Update the custom file label when a file is chosen
+        document.querySelector('.custom-file-input').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'Choose file';
+            const nextSibling = this.nextElementSibling;
+            nextSibling.innerText = fileName;
+        });
+    
+        function validateForm() {
+            // Reset error messages
+           // event.preventDefault();
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('mobileError').style.display = 'none';
+            document.getElementById('countryError').style.display = 'none';
+            document.getElementById('resumeError').style.display = 'none';
+    
+            // Collect form data
+            const fullName = document.getElementById('fullName').value;
+            const username = document.getElementById('username').value;
+            const address = document.getElementById('address').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const country = document.getElementById('country').value;
+            const resume = document.getElementById('resume').files[0];
+    
+            let valid = true;
+    
+            // Validate Name
+            if (!/^[a-zA-Z\s]+$/.test(fullName)) {
+                document.getElementById('nameError').innerText = 'Name must be alphabetical.';
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            }
+    
+            // Validate Mobile Number
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                document.getElementById('mobileError').innerText = 'Mobile No must be 10 digits and start with 6-9.';
+                document.getElementById('mobileError').style.display = 'block';
+                valid = false;
+            }
+    
+            // Validate Country
+            if (country === '') {
+                document.getElementById('countryError').innerText = 'Country is required.';
+                document.getElementById('countryError').style.display = 'block';
+                valid = false;
+            }
+    
+            // Validate Resume Upload
+            if (!resume) {
+                document.getElementById('resumeError').innerText = 'Resume is required.';
+                document.getElementById('resumeError').style.display = 'block';
+                valid = false;
+            }
+    
+            // If all validations pass, send data to the API
+            if (valid) {
+                // Create FormData to handle file upload
+                const formData = new FormData();
+                formData.append("fullName", fullName);
+                formData.append("username", username);
+                formData.append("address", address);
+                formData.append("mobile", mobile);
+                formData.append("email", email);
+                formData.append("country", country);
+                formData.append("resume", resume);
+    
+                // Send the data to the API
+                fetch('http://localhost:8081/api/jobs/profile', {
+    method: 'POST',
+    body: formData,
+})
+.then(response => response.json().then(data => ({status: response.status, data})))  // Include status code in response
+.then(res => {
+    if (res.status === 201) { // Check for 201 status code (created)
+        document.getElementById('msgBox').innerHTML = '<div class="alert alert-success">Resume updated successfully!</div>';
+    } else {
+        document.getElementById('msgBox').innerHTML = '<div class="alert alert-danger">Failed to update resume. Please try again later.</div>';
+    }
+})
+.catch(error => {
+    document.getElementById('msgBox').innerHTML = '<div class="alert alert-danger">Error: ' + error.message + '</div>';
+});
+            }
+        }
+    </script>
+    
+</body>
+
+</html>

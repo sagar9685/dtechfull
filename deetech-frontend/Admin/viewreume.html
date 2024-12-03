@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal - Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f7f6;
+            margin: 0;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(145deg, #283048, #859398);
+            min-height: 100vh;
+            color: white;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .profile_info {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .profile_info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .sidebar .profile_info .name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffc107;
+        }
+
+        .sidebar .logout_btn {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .logout_btn button {
+            width: 100%;
+            padding: 10px;
+            background: #ffc107;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar .logout_btn button:hover {
+            background: #ffa000;
+        }
+
+        /* Main Container */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .header {
+            background: #007bff;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table thead {
+            background: #007bff;
+            color: white;
+        }
+
+        table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background: #f1f1f1;
+        }
+
+        table a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="profile_info">
+            <img src="assets/avatar.png" alt="Admin Avatar">
+            <p class="name">Admin Area</p>
+        </div>
+        <ul>
+            <li><a href="Dashboard.html"><i class="fas fa-palette"></i> Dashboard</a></li>
+            <li><a href="NewJob.html"><i class="fas fa-plus-square"></i> New Job</a></li>
+            <li><a href="JobList.html"><i class="fas fa-file-alt"></i> Job List</a></li>
+            <li><a href="ViewResume.html"><i class="fas fa-file-download"></i> View Resume</a></li>
+            <li><a href="jobquery.html"><i class="fas fa-search"></i> Job Query</a></li>
+            <li><a href="user.html"><i class="fas fa-users"></i> User List</a></li>
+            <li><a href="contact.html"><i class="fas fa-comment-alt"></i> Contact List</a></li>
+        </ul>
+        <div class="logout_btn">
+            <button onclick="logOut()">Logout</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">View Resume/Download Resume</div>
+
+        <p id="lblMsg" class="text-danger text-center"></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>Country</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Resume</th>
+                </tr>
+            </thead>
+            <tbody id="profileTableBody">
+                <!-- Dynamic content will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Example script to load profiles dynamically
+        async function loadProfiles() {
+            try {
+                const response = await fetch('http://localhost:8081/api/jobs/profiles');
+                const data = await response.json();
+
+                if (data.profiles.length > 0) {
+                    const tableBody = document.getElementById('profileTableBody');
+                    tableBody.innerHTML = '';
+
+                    data.profiles.forEach((profile, index) => {
+                        const row = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${profile.fullName || 'N/A'}</td>
+                                <td>${profile.username || 'N/A'}</td>
+                                <td>${profile.country || 'N/A'}</td>
+                                <td>${profile.email || 'N/A'}</td>
+                                <td>${profile.mobile || 'N/A'}</td>
+                                <td>
+                                    <a href="${profile.resumeUrl}" target="_blank">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    document.getElementById('lblMsg').textContent = 'No profiles found.';
+                }
+            } catch (error) {
+                document.getElementById('lblMsg').textContent = 'Error loading profiles.';
+            }
+        }
+
+        window.onload = loadProfiles;
+    </script>
+</body>
+</html>

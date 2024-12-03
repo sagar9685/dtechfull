@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JobEntry - Job Portal Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar Start -->
+        <div class="container-fluid sticky-top px-0">
+            <div class="position-absolute bg-dark" style="left: 0; top: 0; width: 100%; height: 100%;">
+            </div>
+            <div class="container px-0">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-white py-3 px-4">
+                    <a href="index.html" class="navbar-brand p-0">
+                        <!-- <h1 class="text-primary m-0"><i class="fas fa-donate me-3"></i>Deetech Consulting</h1> -->
+                        <h1 class="text-primary m-0">
+                            <img src="img/Deetech_Logo.png" alt="Deetech Logo" height="100" width="250" class="me-3">
+                        
+                        </h1>
+                        
+                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto py-0">
+                            <a href="index.html" class="nav-item nav-link ">Home</a>
+                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="project.html" class="nav-item nav-link">Projects</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown ">Pages</a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="blog.html" class="dropdown-item">Our Blog</a>
+                                    <a href="team.html" class="dropdown-item">Our Team</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                    <a href="faqs.html" class="dropdown-item">Training</a>
+                                    <a href="job-list.html" class="dropdown-item active">Job List</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                       <!-- Login and Signup Buttons Start -->
+<div class="d-flex align-items-center flex-nowrap pt-xl-0">
+    <a href="login.html" id="loginButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+        Login
+    </a>
+    <a href="signup.html" id="signupButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2">
+        Signup
+    </a>
+    <a href="profile.html" id="profileButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+        Profile
+    </a>
+    <a href="#" id="logoutButton" class="btn btn-primary rounded-pill text-white py-2 px-4 mx-2" style="display: none;">
+        Logout
+    </a>
+</div>
+<!-- Login and Signup Buttons End -->
+
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+       <script>
+        window.onload = function() {
+            const username = localStorage.getItem("username") || sessionStorage.getItem("username");
+            const email = localStorage.getItem("email") || sessionStorage.getItem("email");
+            console.log(username);
+            console.log(email);
+    
+            if (username) {
+                document.getElementById('username').value = username;
+            }
+            if (email) {
+                document.getElementById('email').value = email;
+            }
+        };
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded and parsed");
+        
+                // Check if user is logged in by checking for a simple flag (e.g., localStorage item)
+                const authToken = sessionStorage.getItem("authToken") ;
+
+    if (authToken) {
+        console.log("User is considered logged in.");
+        // User is logged in, show Profile and Logout, hide Login and Signup
+        document.getElementById("profileButton").style.display = "inline-block";
+        document.getElementById("logoutButton").style.display = "inline-block";
+        document.getElementById("loginButton").style.display = "none";
+        document.getElementById("signupButton").style.display = "none";
+    } else {
+        console.log("User is not logged in.");
+        // User is not logged in, show Login and Signup, hide Profile and Logout
+        document.getElementById("loginButton").style.display = "inline-block";
+        document.getElementById("signupButton").style.display = "inline-block";
+        document.getElementById("profileButton").style.display = "none";
+        document.getElementById("logoutButton").style.display = "none";
+    }
+        
+                // Simulating login action (can be replaced with your own login logic)
+                document.getElementById("loginButton").addEventListener("click", function () {
+                    console.log("Login button clicked");
+                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+                });
+        
+                // Simulating signup action (can be replaced with your own signup logic)
+                document.getElementById("signupButton").addEventListener("click", function () {
+                    console.log("Signup button clicked");
+                    sessionStorage.setItem("authToken", "dummyAuthToken"); // Set the login flag
+                    window.location.href = "profile.html"; // Redirect to the profile page (or any other page)
+                });
+        
+                // Logout function
+                document.getElementById("logoutButton").addEventListener("click", function () {
+                    console.log("Logout button clicked");
+                    sessionStorage.removeItem("authToken"); // Remove login flag from localStorage
+                    window.location.href = "login.html"; // Redirect to login page
+               
+                });
+            });
+        </script>
+        <!-- Header End -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Job List</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Job List</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Jobs Start -->
+
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                                <h6 class="mt-n1 mb-0">Featured</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                                <h6 class="mt-n1 mb-0">Full Time</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                <h6 class="mt-n1 mb-0">Part Time</h6>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <!-- Job Listings will be inserted here dynamically -->
+                            <div id="job-list" class="row g-4">
+                                <!-- Job items will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Fetch job data from API
+                $.ajax({
+                    url: 'http://localhost:8081/api/jobs/alljobs', // API endpoint to fetch all jobs
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data); // Log the full response to check its structure
+        
+                        const jobList = data; // Assuming the response is an array of job objects
+                        if (Array.isArray(jobList) && jobList.length > 0) {
+                            let jobContent = '';
+                            jobList.forEach((job, index) => {
+                                const companyLogo = job.companyLogo ? `<img class="flex-shrink-0 img-fluid border rounded" src="${job.companyLogo}" alt="${job.company}" style="width: 80px; height: 80px;">` : 'No Logo';
+                                jobContent += `
+                                    <div class="col-sm-12 col-md-6 col-lg-4">
+                                        <div class="job-item p-4 mb-4 shadow-sm rounded">
+                                            <div class="row g-4">
+                                                <div class="col-12 d-flex align-items-center">
+                                                    ${companyLogo}
+                                                    <div class="text-start ps-4">
+                                                        <h5 class="mb-3 text-primary">${job.title}</h5>
+                                                        <span class="text-muted d-block"><i class="fa fa-map-marker-alt text-primary me-2"></i>${job.state}, ${job.country}</span>
+                                                        <span class="text-muted d-block"><i class="far fa-clock text-primary me-2"></i>${job.jobType}</span>
+                                                        <span class="text-muted d-block"><i class="far fa-money-bill-alt text-primary me-2"></i>${job.salary}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                                    <div class="d-flex mb-3">
+                                                        <a class="btn btn-light btn-square me-3" href="#"><i class="far fa-heart text-primary"></i></a>
+                                                     
+                                                         <!-- Updated HTML -->
+                                                <a class="btn btn-primary apply-btn" href="#" data-job-id="${job._id}">Apply Now</a>
+
+                                                    </div>
+                                                    <small class="text-muted"><i class="far fa-calendar-alt text-primary me-2"></i>Deadline: ${new Date(job.lastDate).toLocaleDateString()}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            $('#job-list').html(jobContent); // Inject the job content into the page
+                        } else {
+                            $('#job-list').html('<div class="col-12 text-center">No jobs available.</div>');
+                        }
+                    },
+                    error: function (error) {
+                        console.log('Error fetching job data:', error);
+                        $('#job-list').html('<div class="col-12 text-center">Error fetching job data. Please try again later.</div>');
+                    }
+                });
+                $(document).on('click', '.apply-btn', function (e) {
+    e.preventDefault(); // Prevent default anchor click behavior
+
+    // Check if user is logged in (check for session or localStorage token)
+    const isLoggedIn = sessionStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+
+    if (!isLoggedIn) {
+        // Redirect to the login page if not logged in
+        window.location.href = 'login.html';
+    } else {
+        // If logged in, redirect to job application page
+        const jobId = $(this).data('job-id');
+        window.location.href = `jobdetails.html?id=${jobId}`;
+    }
+});
+
+    });
+    
+</script>
+        
+        <style>
+            /* Styling for the job items */
+            .job-item {
+                background-color: #fff;
+                border: 1px solid #ddd;
+                transition: all 0.3s ease-in-out;
+            }
+        
+            .job-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+        
+            .job-item h5 {
+                font-weight: bold;
+                color: #007bff;
+            }
+        
+            .job-item .text-muted {
+                font-size: 0.9rem;
+            }
+        
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+        
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+        
+            .btn-light {
+                background-color: #f8f9fa;
+                border-color: #ddd;
+            }
+        
+            .btn-light:hover {
+                background-color: #e2e6ea;
+                border-color: #ddd;
+            }
+        
+            .nav-pills .nav-link {
+                border-radius: 0.25rem;
+                padding: 10px 20px;
+                font-weight: 500;
+            }
+        
+            .nav-pills .nav-link.active {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }
+        
+            .job-item .fa {
+                color: #007bff;
+            }
+        </style>
+        
+        <!-- <script>
+    document.getElementById("applyButton").addEventListener("click", function () {
+        if (localStorage.getItem("isLoggedIn") === 'true') {
+            console.log("User is logged in, redirecting to application form...");
+            window.location.href = "jobdetails.html"; // Redirect to application form page
+        } else {
+            console.log("User is not logged in, redirecting to login page...");
+            window.location.href = "login.html"; // Redirect to login page
+        }
+    });
+</script> -->
+
+
+        <!-- Jobs End -->
+
+
+       <!-- Footer Start -->
+       <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Newsletter</h4>
+                            <p class="mb-3">Get the latest update from us on our service.</p>
+                            <div class="position-relative mx-auto rounded-pill">
+                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
+                                <a href="signup.html">
+                                <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-white mb-4">Explore</h4>
+                        <a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a>
+                        <a href="service.html"><i class="fas fa-angle-right me-2"></i> Services</a>
+                        <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="project.html"><i class="fas fa-angle-right me-2"></i> Latest Projects</a>
+                        <a href="testimonial.html"><i class="fas fa-angle-right me-2"></i> testimonial</a>
+                        <a href="team.html"><i class="fas fa-angle-right me-2"></i> Our Team</a>
+                        <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item d-flex flex-column">
+                        <h4 class="text-white mb-4">Contact Info</h4>
+                        <a href=""><i class="fa fa-map-marker-alt me-2"></i>Daleview DR Glen Burnie MD 21060-7682,USA</a>
+                        <a href=""><i class="fas fa-envelope me-2"></i> contact@deetechconsulting.com</a>
+                        <!-- <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                        <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a> -->
+                        <a href="" class="mb-3"><i class="fas fa-phone me-2"></i>+1 (443) 985-4761</a>
+                        <div class="d-flex align-items-center">
+                            <!-- <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-light btn-md-square me-2" href=""><i class="fab fa-twitter"></i></a> -->
+                            <a class="btn btn-light btn-md-square me-2" href="https://www.instagram.com/deetechconsulting/?hl=en"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-light btn-md-square me-0" href="https://www.linkedin.com/in/damilola-waybright-83a254201/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="footer-item-post d-flex flex-column">
+                        <h4 class="text-white mb-4">Popular Post</h4>
+                        <div class="d-flex flex-column mb-3">
+                            <p class="text-uppercase text-primary mb-2">Training Program</p>
+                            <a href="#" class="text-body">Providing Training to Help You Achieve Your Goals.</a>
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                            <p class="text-uppercase text-primary mb-2">Jobs</p>
+                            <a href="#" class="text-body">We Offer Job Opportunities for Your Career Growth.</a>
+                        </div>
+                        <div class="footer-btn text-start">
+                            <a href="#" class="btn btn-light rounded-pill px-4">View All Post <i class="fa fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-body"><a href="#" class="border-bottom text-primary"><i class="fas fa-copyright text-light me-2"></i>Deetech Consulting</a>, All right reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end text-body">
+                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                    Designed By <a class="border-bottom text-primary" href="">Sagar Gupta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

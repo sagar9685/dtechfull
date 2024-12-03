@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container pt-5 pb-5">
+        <div class="main-body">
+            <div class="row gutters-sm mb-4" id="profileContainer">
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <img src="img/user_pic.jpg" alt="UserPic" class="rounded-circle" width="150" />
+                            <h4 class="text-capitalize font-weight-bold" id="userName">Username</h4>
+                            <p class="text-secondary mb-1" id="userUsername">Username</p>
+                            <p class="text-muted font-size-sm text-capitalize">
+                                <i class="fas fa-map-marker-alt mr-2"></i><span id="userCountry">Country</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-3 font-weight-bold">Full Name</div>
+                                <div class="col-sm-9 text-secondary" id="userFullName">N/A</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3 font-weight-bold">Email</div>
+                                <div class="col-sm-9 text-secondary" id="userEmail">N/A</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3 font-weight-bold">Mobile</div>
+                                <div class="col-sm-9 text-secondary" id="userMobile">N/A</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3 font-weight-bold">Address</div>
+                                <div class="col-sm-9 text-secondary" id="userAddress">N/A</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3 font-weight-bold">Resume Upload</div>
+                                <div class="col-sm-9 text-secondary" id="userResume">Not Uploaded</div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-12 text-right">
+                                    <button class="btn btn-primary" onclick="window.location.href='resume.html'">Edit Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to load profile data -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the user is logged in by checking the sessionStorage or localStorage for authToken
+            const authToken = sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
+    
+            if (!authToken) {
+                // If no token is found, redirect to the login page
+                window.location.href = "login.html";
+            }
+    
+            // Logout button functionality
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                sessionStorage.removeItem("authToken");
+                localStorage.removeItem("authToken"); // Ensure both session and local storage are cleared
+                sessionStorage.clear(); // Clear session storage
+                localStorage.clear(); // Clear local storage
+                window.location.href = "login.html"; // Redirect to login page
+            });
+    
+            // Load the user's profile
+            loadUserProfile();
+        });
+    
+        function loadUserProfile() {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" || sessionStorage.getItem("isLoggedIn") === "true";
+    
+            if (isLoggedIn) {
+                // Retrieve user data from localStorage or sessionStorage
+                const username = localStorage.getItem("username") || sessionStorage.getItem("username") || 'N/A';
+                const email = localStorage.getItem("email") || sessionStorage.getItem("email") || 'N/A';
+    
+                // Populate the initial data on the UI
+                document.getElementById('userUsername').innerText = username;
+                document.getElementById('userEmail').innerText = email;
+                document.getElementById('userName').innerText = username;
+    
+                // Fetch additional profile data from the server using email
+                if (email !== 'N/A') {
+                    fetchProfileDataByEmail(email);
+                }
+            } else {
+                // If the user is not logged in, redirect to the login page
+                window.location.href = 'login.html';
+            }
+        }
+    
+        function fetchProfileDataByEmail(email) {
+            // API URL with email query parameter
+            const apiUrl = `http://localhost:8081/api/jobs/profilesbyemail?email=${encodeURIComponent(email)}`;
+    
+            // Make the API call to fetch profile data
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch profile data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Access the profile data and update the UI
+                    const { fullName, mobile, address, resumeUrl } = data.profile;
+    
+                    // Update the UI with the fetched data
+                    document.getElementById('userFullName').innerText = fullName || 'N/A';
+                    document.getElementById('userMobile').innerText = mobile || 'N/A';
+                    document.getElementById('userAddress').innerText = address || 'N/A';
+                    document.getElementById('userResume').innerHTML = resumeUrl
+                        ? `<a href="${resumeUrl}" target="_blank">Resume Available</a>`
+                        : 'Not Uploaded';
+                })
+                .catch(error => {
+                    console.error('Error fetching profile data:', error);
+                });
+        }
+    
+        // Ensure that the profile is loaded when the page is loaded
+        window.onload = loadUserProfile;
+    </script>
+    
+</body>
+</html>

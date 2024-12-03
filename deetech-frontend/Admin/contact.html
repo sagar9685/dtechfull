@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Portal - Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <style>
+        /* Overall page adjustments */
+        body {
+            background: #f4f7f6;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(145deg, #3b4b6b, #1a2738);
+            min-height: 100vh;
+            color: white;
+            position: fixed;
+            transition: all 0.3s ease;
+        }
+        .sidebar:hover {
+            width: 270px;
+        }
+        .sidebar .profile_info {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .profile_info p {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .sidebar .siderbar_menu li {
+            padding: 15px 20px;
+            transition: background 0.3s;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .sidebar .siderbar_menu li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .siderbar_menu li a {
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .sidebar .siderbar_menu li a:hover {
+            color: #ffc107;
+        }
+        .logout_btn button {
+            width: 100%;
+            padding: 12px;
+            background: #ffc107;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+        .logout_btn button:hover {
+            background: #ffa000;
+        }
+
+        /* Main container styling */
+        .main_container {
+            margin-left: 250px;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: margin-left 0.3s;
+        }
+        .navbar {
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        .logo {
+            margin-left: auto;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Dashboard Cards */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-icon {
+            font-size: 50px;
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .card h2 {
+            font-size: 34px;
+            margin: 0;
+            color: #fff;
+        }
+
+        /* Card colors */
+        .l-bg-cherry {
+            background: linear-gradient(to right, #ff6b6b, #f09);
+        }
+        .l-bg-blue-dark {
+            background: linear-gradient(to right, #373b44, #4286f4);
+        }
+        .l-bg-green-dark {
+            background: linear-gradient(to right, #0a504a, #38ef7d);
+        }
+        .l-bg-orange-dark {
+            background: linear-gradient(to right, #ff8c00, #ffba56);
+        }
+
+        /* Adding fade-in animation to elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Table Styling */
+        .table-hover tbody tr:hover {
+            background-color: #f1f2f6;
+            cursor: pointer;
+        }
+
+        /* Delete button styling */
+        .delete-button-css {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .delete-button-css:hover {
+            transform: scale(1.2);
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="profile_info">
+                <p class="name">Admin Area</p>
+            </div>
+            <ul class="siderbar_menu">
+                <li><a href="Dashboard.html"><i class="fas fa-palette"></i> Dashboard</a></li>
+                <li><a href="NewJob.html"><i class="fas fa-plus-square"></i> New Job</a></li>
+                <li><a href="JobList.html"><i class="fas fa-file-alt"></i> Job List</a></li>
+                <li><a href="ViewResume.html"><i class="fas fa-file-download"></i> View Resume</a></li>
+                <li><a href="jobquery.html"><i class="fas fa-search"></i> Job Query</a></li>
+                <li><a href="user.html"><i class="fas fa-users"></i> User List</a></li>
+                <li><a href="contact.html"><i class="fas fa-comment-alt"></i> Contact List</a></li>
+            </ul>
+            <div class="logout_btn">
+                <a href="../login.html">
+                    <button onclick="logOut()">Logout</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Container -->
+        <div class="main_container">
+            <div class="navbar">
+                Online Job Portal - Contact List
+            </div>
+
+            <div class="container-fluid mt-4 pt-4 pb-4">
+                <h3 class="fade-in">Contact List/Details</h3>
+
+                <!-- Alert message for feedback -->
+                <div id="lblMsg" class="text-danger mb-3 text-center fade-in"></div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactList">
+                            <!-- Data will be populated here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to delete a contact (you can integrate the backend delete API)
+        async function deleteContact(contactId, row) {
+            try {
+                const response = await fetch(`http://localhost:8081/api/contactusdelete/${contactId}`, {
+                    method: 'DELETE',
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Show success message
+                    alert('Contact deleted successfully');
+                    
+                    // Remove the contact row from the table dynamically
+                    row.remove();
+                } else {
+                    alert(data.message || 'Failed to delete contact');
+                }
+            } catch (error) {
+                console.error('Error deleting contact:', error);
+                alert('An error occurred while deleting the contact');
+            }
+        }
+
+        // Fetch contact data and update the table
+        async function getContactData() {
+            try {
+                const response = await fetch('http://localhost:8081/api/contactUsData');
+                const data = await response.json();
+                const contactList = document.getElementById('contactList');
+
+                if (data.contacts.length === 0) {
+                    contactList.innerHTML = '<tr><td colspan="6" class="text-center">No contact data available</td></tr>';
+                } else {
+                    contactList.innerHTML = ''; // Clear existing rows before adding new ones
+                    data.contacts.forEach((contact, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${contact.name}</td>
+                            <td>${contact.email}</td>
+                            <td>${contact.subject}</td>
+                            <td>${contact.message}</td>
+                            <td class="text-center">
+                                <img src="../img/delete.png" alt="Delete" class="delete-button-css" style="height: 25px; width: 25px;" onclick="deleteContact('${contact._id}', this.closest('tr'))">
+                            </td>
+                        `;
+                        contactList.appendChild(row);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching contact data:', error);
+                document.getElementById('lblMsg').textContent = 'Failed to load contact data';
+            }
+        }
+
+        // Run the function to fetch and display contact data on page load
+        window.onload = getContactData;
+
+        function logOut() {
+            alert("Logging out...");
+        }
+    </script>
+</body>
+</html>

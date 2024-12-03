@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Portal - Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    
+    <style>
+        /* Overall page adjustments */
+        body {
+            background: #f4f7f6;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(145deg, #3b4b6b, #1a2738);
+            min-height: 100vh;
+            color: white;
+            position: fixed;
+        }
+        .sidebar .profile_info {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .siderbar_menu li {
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+        .sidebar .siderbar_menu li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .siderbar_menu li a {
+            color: white;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        .sidebar .siderbar_menu li a:hover {
+            color: #ffc107;
+        }
+        .logout_btn button {
+            width: 100%;
+            padding: 10px;
+            background: #ffc107;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .logout_btn button:hover {
+            background: #ffa000;
+        }
+
+        /* Main container styling */
+        .main_container {
+            margin-left: 250px;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            margin-left: auto;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Dashboard Cards */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-icon {
+            font-size: 50px;
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .card h2 {
+            font-size: 34px;
+            margin: 0;
+            color: #fff;
+        }
+
+        /* Card colors */
+        .l-bg-cherry {
+            background: linear-gradient(to right, #ff6b6b, #f09);
+        }
+        .l-bg-blue-dark {
+            background: linear-gradient(to right, #373b44, #4286f4);
+        }
+        .l-bg-green-dark {
+            background: linear-gradient(to right, #0a504a, #38ef7d);
+        }
+        .l-bg-orange-dark {
+            background: linear-gradient(to right, #ff8c00, #ffba56);
+        }
+
+        /* Adding fade-in animation to elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="profile_info">
+                <p class="name">Admin Area</p>
+            </div>
+            <ul class="siderbar_menu">
+                <li><a href="Dashboard.html"><i class="fas fa-palette"></i> Dashboard</a></li>
+                <li><a href="NewJob.html"><i class="fas fa-plus-square"></i> New Job</a></li>
+                <li><a href="JobList.html"><i class="fas fa-file-alt"></i> Job List</a></li>
+                <li><a href="ViewResume.html"><i class="fas fa-file-download"></i> View Resume</a></li>
+                <li><a href="jobquery.html"><i class="fas fa-search"></i> Job Query</a></li>
+                <li><a href="user.html"><i class="fas fa-users"></i> User List</a></li>
+                <li><a href="contact.html"><i class="fas fa-comment-alt"></i> Contact List</a></li>
+            </ul>
+            <div class="logout_btn">
+                <a href="../login.html">
+                <button onclick="logOut()">Logout</button></a>
+            </div>
+        </div>
+
+    <!-- Main Content -->
+    <div class="main_container">
+        <div class="navbar">
+            <h3>Job Portal Admin - Add New Job</h3>
+        </div>
+
+        <div class="container mt-4">
+            <h3 class="text-center">Add Job Details</h3>
+
+            <!-- Success message -->
+            <div id="successMessage" class="alert alert-success mt-4" role="alert">
+                Job successfully added!
+            </div>
+
+            <!-- Job Form -->
+            <form id="jobForm">
+                <!-- Job Form Fields -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Job Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g., Web Developer" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Number of Posts</label>
+                        <input type="number" name="numberOfPosts" class="form-control" placeholder="Enter Number of Positions" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Enter Job Description" required></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Qualification/Education</label>
+                        <input type="text" name="qualification" class="form-control" placeholder="e.g., MCA, BTech, MBA" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Experience</label>
+                        <input type="text" name="experience" class="form-control" placeholder="e.g., 2 Years, 3 Years" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Specialization</label>
+                        <input type="text" name="specialization" class="form-control" placeholder="Enter Specialization" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Last Date to Apply</label>
+                        <input type="date" name="lastDate" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Salary</label>
+                        <input type="text" name="salary" class="form-control" placeholder="e.g., 25000/Month, 7LPA" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Job Type</label>
+                        <select name="jobType" class="form-select" required>
+                            <option value="" selected disabled>Select Job Type</option>
+                            <option>Full Time</option>
+                            <option>Part Time</option>
+                            <option>Remote</option>
+                            <option>Freelance</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Company/Organization</label>
+                        <input type="text" name="company" class="form-control" placeholder="Enter Company/Organization" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Company Logo</label>
+                        <input type="file" name="companyLogo" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Website</label>
+                        <input type="url" name="website" class="form-control" placeholder="Enter Website">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Country</label>
+                        <select name="country" class="form-select" required>
+                            <option value="" selected disabled>Select Country</option>
+                            <option>USA</option>
+                            <option>India</option>
+                            <option>UK</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>State</label>
+                        <input type="text" name="state" class="form-control" placeholder="Enter State" required>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Add Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('jobForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const jobData = new FormData(this);
+
+            fetch('http://localhost:8081/api/jobs/create', {
+                method: 'POST',
+                body: jobData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.message) {
+                    // Display success message
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';  // Show success message
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';  // Hide it after 5 seconds
+                    }, 5000);
+                } else {
+                    alert('Something went wrong. No message returned.');
+                }
+            })
+            .catch(error => {
+                alert('An error occurred while saving the job.');
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
