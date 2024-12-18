@@ -227,7 +227,7 @@
         // Function to delete a contact (you can integrate the backend delete API)
         async function deleteContact(contactId, row) {
             try {
-                const response = await fetch(`http://localhost:8081/api/contactusdelete/${contactId}`, {
+                const response = await fetch(`https://dtechfull.onrender.com/api/contactusdelete/${contactId}`, {
                     method: 'DELETE',
                 });
 
@@ -251,7 +251,7 @@
         // Fetch contact data and update the table
         async function getContactData() {
             try {
-                const response = await fetch('http://localhost:8081/api/contactUsData');
+                const response = await fetch('https://dtechfull.onrender.com/api/contactUsData');
                 const data = await response.json();
                 const contactList = document.getElementById('contactList');
 

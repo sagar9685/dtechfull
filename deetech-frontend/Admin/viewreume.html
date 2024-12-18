@@ -203,7 +203,7 @@
         // Example script to load profiles dynamically
         async function loadProfiles() {
             try {
-                const response = await fetch('http://localhost:8081/api/jobs/profiles');
+                const response = await fetch('https://dtechfull.onrender.com/api/jobs/profiles');
                 const data = await response.json();
 
                 if (data.profiles.length > 0) {

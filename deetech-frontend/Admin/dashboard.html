@@ -228,10 +228,10 @@
         async function fetchCounts() {
             try {
                 // Fetch counts from respective endpoints
-                const userCountResponse = await fetch('http://localhost:8081/api/countuser');
-                const jobCountResponse = await fetch('http://localhost:8081/api/countjobs');
-                const appliedJobsResponse = await fetch('http://localhost:8081/api/countapply');
-                const contactUsersResponse = await fetch('http://localhost:8081/api/countcontact');
+                const userCountResponse = await fetch('https://dtechfull.onrender.com/api/countuser');
+                const jobCountResponse = await fetch('https://dtechfull.onrender.com/api/countjobs');
+                const appliedJobsResponse = await fetch('https://dtechfull.onrender.com/api/countapply');
+                const contactUsersResponse = await fetch('https://dtechfull.onrender.com/api/countcontact');
 
                 if (userCountResponse.ok && jobCountResponse.ok && appliedJobsResponse.ok && contactUsersResponse.ok) {
                     // Parse JSON responses
